@@ -1,0 +1,16 @@
+import csv #Para leer archivos csv
+
+def read_csv(phat): #función que recibe la ubicación del archivo
+  with open(phat, 'r') as csvfile: #Aqui se abre el archibo y se lee solamente con el permiso de le damos a python con 'r'
+    reader =csv.reader(csvfile, delimiter=',') #aqui tenemos nuestro lector de archivos csv con la importacion de la funcion csv.reader Aqui se indican dos cosas 1 el archivo csvfile y el otro el delimitador que en este caso son "," comas. 
+    header = next (reader)  #header = titulo encabezado
+    data = []
+    for row in reader: #aqui damos instruccion de leer c/u fila row
+      iterable = zip(header, row) #zip= unir, titulo y el iterabel representado en  fila (row)
+      country_dict = {key: value for key, value in iterable} #dictionari comprenheition 
+      data.append(country_dict) #creo una lista de diccionarios 
+    return data
+
+if __name__ == '__main__':  #lo tenemos como función pero lo podemos leer como scrip desde la terminal. 
+  data = read_csv('./app/data.csv') #Aqui indico que leer el archivo csv
+  print(data[0])
